@@ -1,5 +1,10 @@
 package localtunnel
 
+import (
+	"net/http"
+	"time"
+)
+
 // DefaultBaseURL is the default value for the Options.BaseURL
 var DefaultBaseURL = "https://localtunnel.me"
 
@@ -20,6 +25,7 @@ type Options struct {
 	BaseURL        string
 	MaxConnections int
 	Log            Logger
+	HTTP           *http.Client
 }
 
 func (o *Options) setDefaults() {
@@ -31,6 +37,9 @@ func (o *Options) setDefaults() {
 	}
 	if o.Log == nil {
 		o.Log = DefaultLogger
+	}
+	if o.HTTP == nil {
+		o.HTTP = http.Client{Timeout: 30 * time.Second}
 	}
 }
 

@@ -45,8 +45,7 @@ func Listen(options Options) (*Listener, error) {
 
 	// Call the setupURL
 	l.log.Println("registering tunnel:", setupURL)
-	client := http.Client{Timeout: 30 * time.Second}
-	res, err := client.Get(setupURL)
+	res, err := options.HTTP.Get(setupURL)
 	if err != nil {
 		return nil, fmt.Errorf("failed to setup tunnel, error: %s", err)
 	}
