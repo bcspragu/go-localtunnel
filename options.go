@@ -39,7 +39,7 @@ func (o *Options) setDefaults() {
 		o.Log = DefaultLogger
 	}
 	if o.HTTP == nil {
-		o.HTTP = http.Client{Timeout: 30 * time.Second}
+		o.HTTP = &http.Client{Timeout: 30 * time.Second}
 	}
 }
 
